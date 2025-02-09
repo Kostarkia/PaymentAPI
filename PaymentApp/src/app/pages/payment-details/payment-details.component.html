@@ -1,0 +1,28 @@
+<div class="bg-gray-100 text-center py-5 rounded-md">
+  <h1 class="text-2xl font-bold">Payment Detail Register</h1>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
+  <div>
+    <app-payment-detail-form></app-payment-detail-form>
+  </div>
+
+  <div>
+    <ul class="space-y-3">
+      @for (pd of service.list; track pd){
+      <li class="flex justify-between items-center bg-white shadow-md p-4 rounded-lg hover:bg-gray-50 cursor-pointer">
+
+        <div class="flex-grow" (click)="populateForm(pd)">
+          <div class="font-semibold text-lg">{{ pd.cardOwnerName }}</div>
+          <div class="text-gray-600">{{ pd.cardNumber }}</div>
+          <div class="text-sm font-semibold">{{ pd.expirationDate }}</div>
+        </div>
+
+        <button (click)="onDelete(pd.paymentDetailID)" class="text-gray-500 hover:text-red-600">
+          <i class="fa-solid fa-trash-can fa-lg"></i>
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+</div>

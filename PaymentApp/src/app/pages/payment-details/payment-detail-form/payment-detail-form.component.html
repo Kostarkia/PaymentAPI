@@ -1,0 +1,41 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="space-y-4 bg-white p-6 shadow-md rounded-lg">
+  
+    <input type="hidden" formControlName="paymentDetailID">
+    
+    <div>
+      <label class="block text-gray-700 font-semibold">Card Owner Name</label>
+      <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
+        placeholder="Name on Card" 
+        formControlName="cardOwnerName">
+    </div>
+  
+    <div>
+      <label class="block text-gray-700 font-semibold">Card Number</label>
+      <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
+        placeholder="16 Digit Card Number" 
+        formControlName="cardNumber">
+    </div>
+  
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-gray-700 font-semibold">Security Code</label>
+        <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
+          placeholder="CVV"
+          formControlName="securityCode">
+      </div>
+      <div>
+        <label class="block text-gray-700 font-semibold">Valid Through</label>
+        <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
+          placeholder="MM/YY" 
+          formControlName="expirationDate">
+      </div>
+    </div>
+  
+    <div>
+      <button class="w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg text-lg font-semibold transition">
+        Submit
+      </button>
+    </div>
+  
+  </form>
+  
