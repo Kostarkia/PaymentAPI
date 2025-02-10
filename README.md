@@ -7,21 +7,21 @@ Technologies Used
 -
 BackEnd
 -
-ASP.Net Web API,
-Restful API,
-Entity Framework,
-Swagger,
+"ASP.Net Web API
+Restful API
+Entity Framework
+Swagger
 SQL Server
 
 FrontEnd
 -
-Angular 19,
-TypeScript,
-Tailwind CSS,
-RESTful API Entegrasyonu,
-ngx-toastr,
-HttpClient,
-Responsive Design
+Angular 19
+TypeScript
+Tailwind CSS
+RESTful API Entegrasyonu
+ngx-toastr
+HttpClient
+Responsive Design"
 
 
 
