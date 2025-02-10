@@ -7,7 +7,8 @@ Technologies Used
 -
 BackEnd
 -
-"ASP.Net Web API
+ASP.Net Web API
+
 Restful API
 Entity Framework
 Swagger
@@ -21,7 +22,7 @@ Tailwind CSS
 RESTful API Entegrasyonu
 ngx-toastr
 HttpClient
-Responsive Design"
+Responsive Design
 
 
 
