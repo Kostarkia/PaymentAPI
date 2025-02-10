@@ -1,6 +1,7 @@
 ﻿using PaymentAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace PaymentAPI.EndPoints
 {
     public static class PaymentDetailEndpoints
@@ -11,30 +12,17 @@ namespace PaymentAPI.EndPoints
 
             group.MapGet("/", async (PaymentDetailContext db) =>
             {
-                var data = db.PaymentDetails.ToList();
+                var data = await db.PaymentDetails.ToListAsync();
 
                 return data;
             })
             .WithName("GetAllPaymentDetails")
             .WithOpenApi();
 
-            group.MapGet("/{id}", async Task<Results<Ok<PaymentDetail>, NotFound>> (Guid paymentdetailid, PaymentDetailContext db) =>
+            group.MapPut("/{paymentDetailID}", async Task<Results<Ok, NotFound>> (Guid paymentDetailID, PaymentDetail paymentDetail, PaymentDetailContext db) =>
             {
-                return await db.PaymentDetails.AsNoTracking()
-                    .FirstOrDefaultAsync(model => model.PaymentDetailID == paymentdetailid)
-                    is PaymentDetail model
-                        ? TypedResults.Ok(model)
-                        : TypedResults.NotFound();
-            })
-            .WithName("GetPaymentDetailById")
-            .WithOpenApi();
-
-            group.MapPut("/{id}", async Task<Results<Ok, NotFound>> (string paymentDetailID, PaymentDetail paymentDetail, PaymentDetailContext db) =>
-            {
-                var id = Guid.Parse(paymentDetailID);
-
                 var affected = await db.PaymentDetails
-                    .Where(model => model.PaymentDetailID == id)
+                    .Where(model => model.PaymentDetailID == paymentDetailID)
                     .ExecuteUpdateAsync(setters => setters
                       .SetProperty(m => m.PaymentDetailID, paymentDetail.PaymentDetailID)
                       .SetProperty(m => m.CardOwnerName, paymentDetail.CardOwnerName)
@@ -49,12 +37,28 @@ namespace PaymentAPI.EndPoints
 
             group.MapPost("/", async (PaymentDetail paymentDetail, PaymentDetailContext db) =>
             {
-                db.PaymentDetails.Add(paymentDetail);
-                await db.SaveChangesAsync();
-                return TypedResults.Created($"/api/PaymentDetail/{paymentDetail.PaymentDetailID}", paymentDetail);
+                try
+                {
+                    var checkIfAlreadyExist = await db.PaymentDetails.AsNoTracking().AnyAsync(a => a.CardNumber == paymentDetail.CardNumber);
+
+                    if (checkIfAlreadyExist)
+                    {
+                        return Results.BadRequest("Card Number already exists");
+                    }
+
+                    db.PaymentDetails.Add(paymentDetail);
+
+                    await db.SaveChangesAsync();
+
+                    return Results.Ok();
+
+                }
+                catch (Exception ex)
+                {
+                    return Results.BadRequest(ex.ToString());
+                }
             })
-            .WithName("CreatePaymentDetail")
-            .WithOpenApi();
+            .WithName("CreatePaymentDetail");
 
             group.MapDelete("/{paymentDetailID}", async (Guid paymentDetailID, PaymentDetailContext db) =>
             {

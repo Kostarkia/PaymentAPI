@@ -13,29 +13,41 @@
       <label class="block text-gray-700 font-semibold">Card Number</label>
       <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
         placeholder="16 Digit Card Number" 
-        formControlName="cardNumber">
+        formControlName="cardNumber"
+        (input)="formatCardNumber($event)"
+        >
     </div>
+      
   
     <div class="grid grid-cols-2 gap-4">
       <div>
         <label class="block text-gray-700 font-semibold">Security Code</label>
-        <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
+        <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
           placeholder="CVV"
-          formControlName="securityCode">
+          formControlName="securityCode"
+          (input)="formatSecurityCode($event)"
+          type="password">
       </div>
       <div>
         <label class="block text-gray-700 font-semibold">Valid Through</label>
         <input class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" 
           placeholder="MM/YY" 
-          formControlName="expirationDate">
+          formControlName="expirationDate" 
+          (input)="formatExpirationDate($event)">
       </div>
+      
     </div>
   
     <div>
-      <button class="w-full bg-green-500 hover:bg-green-600 text-white p-3 rounded-lg text-lg font-semibold transition">
+      <button 
+        class="w-full p-3 rounded-lg text-lg font-semibold transition"
+        [ngClass]="{
+          'bg-green-500 hover:bg-green-600': paymentForm.valid,
+          'bg-gray-300 cursor-not-allowed': !paymentForm.valid
+        }"
+        [disabled]="!paymentForm.valid">
         Submit
       </button>
     </div>
   
   </form>
-  

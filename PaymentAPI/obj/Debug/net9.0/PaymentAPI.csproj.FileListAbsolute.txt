@@ -530,3 +530,4 @@ C:\source\PaymentAPI\PaymentAPI\obj\Debug\net9.0\refint\PaymentAPI.dll
 C:\source\PaymentAPI\PaymentAPI\obj\Debug\net9.0\PaymentAPI.pdb
 C:\source\PaymentAPI\PaymentAPI\obj\Debug\net9.0\PaymentAPI.genruntimeconfig.cache
 C:\source\PaymentAPI\PaymentAPI\obj\Debug\net9.0\ref\PaymentAPI.dll
+C:\source\PaymentAPI\PaymentAPI\obj\Debug\net9.0\PaymentAPI.sourcelink.json

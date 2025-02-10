@@ -24,14 +24,62 @@ export class PaymentDetailFormComponent {
     this.paymentForm = this.fb.group({
       paymentDetailID: [null],
       cardOwnerName: ['', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16)]],
+      cardNumber: ['', [
+        Validators.required, 
+        Validators.pattern(/^[0-9]{16}$/),
+        Validators.maxLength(16)
+      ]],
       securityCode: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-      expirationDate: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+      expirationDate: ['', [
+        Validators.required,
+        Validators.pattern(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/),
+        Validators.maxLength(5)
+      ]],
     });
 
     if (!this.service.formData) {
       this.service.formData = new PaymentDetail();
     }
+  }
+
+  formatSecurityCode(event: any): void {
+    let input = event.target.value;
+  
+    input = input.replace(/\D/g, '');
+  
+    if (input.length > 3) {
+      input = input.substring(0, 3);
+    }
+  
+    event.target.value = input;
+  }
+
+  formatCardNumber(event: any): void {
+    let input = event.target.value;
+  
+    input = input.replace(/\D/g, '');
+  
+    if (input.length > 16) {
+      input = input.substring(0, 16);
+    }
+  
+    event.target.value = input;
+  }
+
+  formatExpirationDate(event: any): void {
+    let input = event.target.value;
+
+    input = input.replace(/\D/g, '');
+
+    if (input.length > 4) {
+      input = input.substring(0, 4);
+    }
+
+    if (input.length >= 3) {
+      input = input.substring(0, 2) + '/' + input.substring(2, 4);
+    }
+
+    event.target.value = input;
   }
 
   insertRecord() {
@@ -43,11 +91,16 @@ export class PaymentDetailFormComponent {
             toastClass: 'custom-toastr',
             timeOut: 1000
           });
-          
+
           this.service.refreshList();
           this.paymentForm.reset();
         },
-        error: err => { console.log(err) }
+        error: err => {
+          this.toastr.success('Card Number already exists!', 'Payment Detail Register', {
+            toastClass: 'custom-toastr',
+            timeOut: 1000
+          });
+        }
       })
   }
   updateRecord() {
@@ -62,7 +115,7 @@ export class PaymentDetailFormComponent {
         error: err => { console.log(err) }
       })
   }
- 
+
   onSubmit() {
     this.service.formSubmitted = true
 

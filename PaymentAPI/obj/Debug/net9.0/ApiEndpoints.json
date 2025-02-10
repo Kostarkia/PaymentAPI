@@ -23,7 +23,7 @@
   },
   {
     "ContainingType": "PaymentAPI.EndPoints.PaymentDetailEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_3",
+    "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_2",
     "RelativePath": "api/PaymentDetail/",
     "HttpMethod": "POST",
     "IsController": false,
@@ -37,11 +37,9 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "PaymentAPI.Models.PaymentDetail",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 201
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
       }
     ],
     "Tags": [
@@ -52,47 +50,14 @@
   {
     "ContainingType": "PaymentAPI.EndPoints.PaymentDetailEndpoints\u002B\u003C\u003Ec",
     "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_1",
-    "RelativePath": "api/PaymentDetail/{id}",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "paymentdetailid",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "PaymentAPI.Models.PaymentDetail",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 404
-      }
-    ],
-    "Tags": [
-      "PaymentDetail"
-    ],
-    "EndpointName": "GetPaymentDetailById"
-  },
-  {
-    "ContainingType": "PaymentAPI.EndPoints.PaymentDetailEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_2",
-    "RelativePath": "api/PaymentDetail/{id}",
+    "RelativePath": "api/PaymentDetail/{paymentDetailID}",
     "HttpMethod": "PUT",
     "IsController": false,
     "Order": 0,
     "Parameters": [
       {
         "Name": "paymentDetailID",
-        "Type": "System.String",
+        "Type": "System.Guid",
         "IsRequired": true
       },
       {
@@ -120,7 +85,7 @@
   },
   {
     "ContainingType": "PaymentAPI.EndPoints.PaymentDetailEndpoints\u002B\u003C\u003Ec",
-    "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_4",
+    "Method": "\u003CMapPaymentDetailEndpoints\u003Eb__0_3",
     "RelativePath": "api/PaymentDetail/{paymentDetailID}",
     "HttpMethod": "DELETE",
     "IsController": false,
