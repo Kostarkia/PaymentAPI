@@ -1,4 +1,8 @@
 Asp.Net Core Web API CRUD Operations with Angular-19
+-
+
+This structure is designed to perform basic CRUD operations such as adding, updating, deleting, and listing data.
+
 Technologies Used
 -
 BackEnd
@@ -19,5 +23,5 @@ ngx-toastr
 HttpClient
 Responsive Design
 
-This structure is designed to perform basic CRUD operations such as adding, updating, deleting, and listing data.
+
 
